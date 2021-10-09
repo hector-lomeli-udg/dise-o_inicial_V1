@@ -1,45 +1,52 @@
+//import 'package:diseno_inicial/src/pages/home/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:math';
 
+import 'package:diseno_inicial/src/pages/scroll/scroll_page.dart';
+import 'package:diseno_inicial/src/pages/home/settings/politicas_uso_page.dart';
+import 'package:diseno_inicial/src/pages/home/settings/politicas_privacidad_page.dart';
 
-class TraducirImagenesPage extends StatefulWidget {
-  const TraducirImagenesPage({Key? key}) : super(key: key);
+
+class ConfiguracionPage extends StatefulWidget {
+  const ConfiguracionPage({Key? key}) : super(key: key);
 
   @override
-  _TraducirImagenesPageState createState() => _TraducirImagenesPageState();
+  _ConfiguracionPageState createState() => _ConfiguracionPageState();
 }
 
-class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
+class _ConfiguracionPageState extends State<ConfiguracionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TRADUCIR IMAGENES'),
+        title: Text('CONFIGURACION'),
       ),
+
+      
       body: Stack(
         children: [
           _fondoApp(),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                _tituloDescripcion(),
-                _botonSeleccionarArchivo(),
-                SizedBox(height: 60.0,),
-                _botones(),
-                SizedBox(height: 60.0,),
-                Text('Aqui mostrara la traduccion del cuadro de texto'),
-                SizedBox(height: 60.0,),
-                Container(height: 200, width: 200, color: Colors.white,)
-              ],
-            ),
-          ),
+
+          SingleChildScrollView( //SIMILAR A LISTVIEW, LA DIFERENCIA ES QUE ABARCA TODA LA PANTALLA
+              child: Column(
+                children: [
+                  _tituloDescripcion(),
+                  Text('pepe_el_toro_es_inocente@gmail.com'),
+                  _botonPoliticasDePrivacidad(),
+                  SizedBox(height: 30.0,),
+                  _botonPoliticasDeUso(),
+                  SizedBox(height: 60.0,),
+                  _botonSalir(context)
+                ],
+              ),
+            )
         ],
       ),
-
-      bottomNavigationBar: _bottomNavigationBar(context)
+      bottomNavigationBar: _bottomNavigationBar(context),
     );
   }
+
 
 
   Widget _fondoApp(){
@@ -87,6 +94,7 @@ class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
     );
   }
 
+  //SECCION DE TEXTO DE INICIO
   Widget _tituloDescripcion(){
     return SafeArea(
       child: Container(
@@ -94,7 +102,7 @@ class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Haga click en el boton de seleccionar para poder traducir su foto o imagen al cuadro de texto o mandar a imprimir', style:TextStyle( color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),),
+              Text('Configuracion e información de usuario', style:TextStyle( color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
               SizedBox( height: 10.0),
               //Text('Classify this transaccion into a particular category', style:TextStyle( color: Colors.white, fontSize: 18.0, )),
             ],
@@ -105,57 +113,66 @@ class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
 
 
 
-  _botonSeleccionarArchivo(){
+  Widget _botonPoliticasDePrivacidad(){
+    return FlatButton(
+      onPressed: (){
+        final rutaPoliticasDePrivacidad = MaterialPageRoute(
+                builder: (context){
+                  return PoliticasDePrivacidadPage();
+                }
+              );
+            Navigator.push( context, rutaPoliticasDePrivacidad);
+      },
+      child: Container(
+        //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+        child: Text('Politicas de privacidad'),
+      ),
+    );
+  }
+
+
+
+  Widget _botonPoliticasDeUso(){
+    return FlatButton(
+      onPressed: (){
+        final rutaPoliticasDeUso = MaterialPageRoute(
+                builder: (context){
+                  return PoliticasDeUsoPage();
+                }
+              );
+            Navigator.push( context, rutaPoliticasDeUso);
+      },
+      child: Container(
+        //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+        child: Text('Politicas de uso'),
+      ),
+    );
+  }
+
+
+  Widget _botonSalir(BuildContext context){
     return RaisedButton(
           shape: StadiumBorder(),
           color: Colors.blue,
           textColor: Colors.white,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-            child: Text('Seleccionar Archivo', style: TextStyle(fontSize: 20.0),),
+            padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+            child: Text('Salir', style: TextStyle(fontSize: 20.0),),
           ),
           onPressed: (){
-            //navegar
+            final rutaScrollPage = MaterialPageRoute(
+                builder: (context){
+                  return ScrollPage();
+                }
+              );
+            Navigator.push( context, rutaScrollPage);
           },
         );
   }
 
 
-  Widget _botones(){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        RaisedButton(
-          shape: StadiumBorder(),
-          color: Colors.blue,
-          textColor: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-            child: Text('Traduccion', style: TextStyle(fontSize: 20.0),),
-          ),
-          onPressed: (){
-            //navegar
-          },
-        ),
-        RaisedButton(
-          shape: StadiumBorder(),
-          color: Colors.blue,
-          textColor: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-            child: Text('Imprimir', style: TextStyle(fontSize: 20.0),),
-          ),
-          onPressed: (){
-            //navegar
-          },
-        ),
-      ],
-    );
-  }
-
-
   Widget _bottomNavigationBar( BuildContext context){ 
-  int _botonBarraActual = 0;
+  int _botonBarraActual = 2;
   
   List _listaPaginas = [ //Se usara para tomar la posicion del string y usarlo en el navigator
     'menu',
@@ -171,7 +188,6 @@ class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
       ),
       
       child: BottomNavigationBar(
-
         onTap: (index){ //Al hacer tap obtendra el index de la barra y se ira a la pagina requerida
           setState(() {
             _botonBarraActual = index;
@@ -179,7 +195,7 @@ class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
           });
         },
 
-        currentIndex: _botonBarraActual, //se toma el indice actual  
+        currentIndex: _botonBarraActual, //se toma el indice actual
 
         items: [ //Todos los items de la barra de navegacion
           BottomNavigationBarItem(
@@ -194,8 +210,9 @@ class _TraducirImagenesPageState extends State<TraducirImagenesPage> {
             icon: Icon( Icons.supervised_user_circle, size: 30.0,),
             title: Text('Configuracion'),
           )
-        ], 
+        ],
+        
       )
     );
-  }
+  } 
 }

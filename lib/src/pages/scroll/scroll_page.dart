@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:diseno_inicial/src/pages/home/menu/menu_page.dart';
+import 'package:diseno_inicial/src/pages/login/crear_sesion_page.dart';
+import 'package:diseno_inicial/src/pages/login/inicio_sesion_page.dart';
+
 
 
 class ScrollPage extends StatelessWidget {
@@ -134,17 +136,19 @@ class ScrollPage extends StatelessWidget {
           textColor: Colors.white,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-            child: Text('Iniciar sesion', style: TextStyle(fontSize: 20.0),),
+            child: Text('Iniciar sesión', style: TextStyle(fontSize: 20.0),),
           ),
           onPressed: (){
-            final rutaMenu = MaterialPageRoute(
+            final rutaInicioSesion = MaterialPageRoute(
                 builder: (context){
-                  return MenuPage();
+                  return InicioSesionPage();
                 }
               );
-            Navigator.push( context, rutaMenu);
+            Navigator.push( context, rutaInicioSesion);
           },
         ),
+        Expanded(child: Container()),
+        Divider(height: 20, thickness: 5, indent: 20, endIndent: 20),
         Expanded(child: Container()),
         RaisedButton(
           shape: StadiumBorder(),
@@ -155,12 +159,12 @@ class ScrollPage extends StatelessWidget {
             child: Text('Crear cuenta', style: TextStyle(fontSize: 20.0),),
           ),
           onPressed: (){
-            final rutaMenu = MaterialPageRoute(
+            final rutaCrearSesion = MaterialPageRoute(
                 builder: (context){
-                  return MenuPage();
+                  return CrearSesionPage();
                 }
               );
-            Navigator.push( context, rutaMenu);
+            Navigator.push( context, rutaCrearSesion);
           },
         ),
         Expanded(child: Container()),
