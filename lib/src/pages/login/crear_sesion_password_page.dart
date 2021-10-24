@@ -26,8 +26,8 @@ class CrearSesionPasswordPage extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromRGBO(63, 63, 156, 1.0),
-            Color.fromRGBO(90, 60, 178, 1.0),
+            Colors.lightGreen,
+            Color.fromRGBO(0, 150, 28, 1.0),
           ]
         )
       ),
@@ -117,7 +117,7 @@ class CrearSesionPasswordPage extends StatelessWidget {
       child: TextField(
         obscureText: true,
         decoration: InputDecoration(
-          icon: Icon(Icons.lock_outline, color: Colors.deepPurple, ),
+          icon: Icon(Icons.lock_outline, color: Colors.green[800], ),
           labelText: 'Contraseña',
         ),
       ),
@@ -127,7 +127,7 @@ class CrearSesionPasswordPage extends StatelessWidget {
 
   Widget _botonIngresar(BuildContext context){
 
-    return RaisedButton(
+    return MaterialButton(
       onPressed: (){
         final rutaMenu = MaterialPageRoute(
                 builder: (context){
@@ -140,11 +140,9 @@ class CrearSesionPasswordPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
         child: Text('Ingresar'),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0), 
-      ),
+      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30.0), ),
       elevation: 0.0,
-      color: Colors.deepPurple,
+      color: Colors.green[800],
       textColor: Colors.white,
     );
   }

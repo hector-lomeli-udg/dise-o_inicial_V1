@@ -28,8 +28,8 @@ class InicioSesionPage extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromRGBO(63, 63, 156, 1.0),
-            Color.fromRGBO(90, 60, 178, 1.0),
+            Colors.lightGreen,
+            Color.fromRGBO(0, 150, 28, 1.0),
           ]
         )
       ),
@@ -123,7 +123,7 @@ class InicioSesionPage extends StatelessWidget {
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email, color: Colors.deepPurple, ),
+          icon: Icon(Icons.alternate_email, color: Colors.green[800], ),
           hintText: 'nombre@correo.com',
           labelText: 'Correo electronico',
 
@@ -139,7 +139,7 @@ class InicioSesionPage extends StatelessWidget {
       child: TextField(
         obscureText: true,
         decoration: InputDecoration(
-          icon: Icon(Icons.lock_outline, color: Colors.deepPurple, ),
+          icon: Icon(Icons.lock_outline, color: Colors.green[800], ),
           labelText: 'Contraseña',
         ),
       ),
@@ -148,7 +148,7 @@ class InicioSesionPage extends StatelessWidget {
 
 
   Widget _botonIngresar(BuildContext context){
-    return RaisedButton(
+    return MaterialButton(
       onPressed: (){
         final rutaMenu = MaterialPageRoute(
                 builder: (context){
@@ -162,10 +162,10 @@ class InicioSesionPage extends StatelessWidget {
         child: Text('Ingresar'),
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0), 
+        borderRadius: BorderRadius.circular(30.0), 
       ),
       elevation: 0.0,
-      color: Colors.deepPurple,
+      color: Colors.green[800],
       textColor: Colors.white,
       
     );
@@ -173,7 +173,7 @@ class InicioSesionPage extends StatelessWidget {
 
 
   Widget _botonOlvidoPassword(BuildContext context){
-    return FlatButton(
+    return OutlinedButton(
       onPressed: (){
         final rutaRecuperarPassword = MaterialPageRoute(
                 builder: (context){
@@ -184,7 +184,12 @@ class InicioSesionPage extends StatelessWidget {
       },
       child: Container(
         //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-        child: Text('¿Olvido su contraseña?'),
+        child: Text('Recuperar contraseña'),
+      ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.black87,
+        side: BorderSide(color: Colors.black87, width: 2.0),
+        //shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
       ),
     );
   }

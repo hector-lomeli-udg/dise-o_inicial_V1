@@ -16,6 +16,7 @@ class _TraduccionesGuardadasPageState extends State<TraduccionesGuardadasPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('TRADUCIONES GUARDADAS'),
+        backgroundColor: Colors.green[800],
       ),
       body: Stack(
         children: [
@@ -40,49 +41,21 @@ class _TraduccionesGuardadasPageState extends State<TraduccionesGuardadasPage> {
 
 
   Widget _fondoApp(){
-    final gradiente = Container(
+    final fondo = Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset(0.0, 0.6), //Se define en que punto inicia el gradiente en la coordenada X y Y  
-          end: FractionalOffset(0.0, 1.0),
-          colors: [
-            Color.fromRGBO(52, 54, 101, 1.0),
-            Color.fromRGBO(35, 37, 57, 1.0)
-          ]
-        )
+        color: Colors.white,
       ),
     );
 
-    //PARTE DEL ESTILO DE LA CAJA ROSA
-    final cajaRosa = Transform.rotate(
-      angle: -pi / 5.0, //Para que el angulo del cuadrado se gire 
-      child: Container(
-        height: 360.0,
-        width: 360.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(80.0),
-          gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(236, 98, 188, 1.0),
-              Color.fromRGBO(241, 147, 172, 1.0)
-            ] 
-          ),
-        ),
-      )
-    );
-    
     return Stack(
       children: [
-        gradiente,
-        Positioned( //Sirve para ubicar un elemento con coordenadas especificas
-          top: -100.0,
-          child: cajaRosa,
-        )
+        fondo,
       ],
     );
   }
+
 
   //SECCION DE TEXTO DE INICIO
   Widget _tituloDescripcion(){
@@ -92,9 +65,8 @@ class _TraduccionesGuardadasPageState extends State<TraduccionesGuardadasPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Documentos de traducciones guardadas', style:TextStyle( color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+              Text('Documentos de traducciones guardadas', style:TextStyle( color: Colors.black87, fontSize: 30.0, fontWeight: FontWeight.bold),),
               SizedBox( height: 10.0),
-              //Text('Classify this transaccion into a particular category', style:TextStyle( color: Colors.white, fontSize: 18.0, )),
             ],
           )
       ),
@@ -117,13 +89,12 @@ class _TraduccionesGuardadasPageState extends State<TraduccionesGuardadasPage> {
 
     return Theme( //LA UNICA FORMA DE CAMBIAR LAS PROPIEDADES DEL BOTTOMNAVIGATIONBAR IMPLICA CAMBIAR EL THEME
       data: Theme.of(context).copyWith(
-        canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-        primaryColor: Colors.pinkAccent,
-        textTheme: Theme.of(context).textTheme.copyWith(caption: TextStyle ( color: Color.fromRGBO(116, 117, 152, 1.0)))
+        canvasColor: Colors.white,
+        unselectedWidgetColor: Colors.grey,
       ),
       
       child: BottomNavigationBar(
-
+        fixedColor: Colors.green[800],
         onTap: (index){ //Al hacer tap obtendra el index de la barra y se ira a la pagina requerida
           setState(() {
             _botonBarraActual = index;
@@ -138,11 +109,11 @@ class _TraduccionesGuardadasPageState extends State<TraduccionesGuardadasPage> {
 
         items: [ //Todos los items de la barra de navegacion
           BottomNavigationBarItem(
-            icon: Icon( Icons.calendar_today, size: 30.0,),
+            icon: Icon( Icons.home, size: 30.0,),
             title: Text('Inicio'),
           ),
           BottomNavigationBarItem(
-            icon: Icon( Icons.bubble_chart, size: 30.0,),
+            icon: Icon( Icons.list_alt, size: 30.0,),
             title: Text('Trad. Guardadas'),
           ),
           BottomNavigationBarItem(

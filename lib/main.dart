@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:diseno_inicial/src/pages/scroll/scroll_page.dart';
 
 import 'package:diseno_inicial/src/pages/login/inicio_sesion_page.dart';
+import 'package:diseno_inicial/src/pages/login/crear_sesion_page.dart';
 
 import 'package:diseno_inicial/src/pages/home/menu/traducir_documentos_page.dart';
 import 'package:diseno_inicial/src/pages/home/menu/traducir_imagenes_page.dart';
@@ -37,12 +38,13 @@ class MyApp extends StatelessWidget {
       routes: {
         //SECCION DE BIENVENIDA
         'scroll' : (BuildContext context) => ScrollPage(),
-        //SECCION DEL LOGIN
-        'inicio-sesion' : (BuildContext context) => InicioSesionPage(),
+        //SECCION SCROLL DE INICIO/CREAR SESION
+        'iniciar-sesion' : (BuildContext context) => InicioSesionPage(),
+        'crear-sesion' : (BuildContext context) => CrearSesionPage(),
         //SECCION PRINCIPAL DE TRADUCCIONES
         'traducir-texto' : (BuildContext context) => TraducirTextoPage(),
         'traducir-documentos' : (BuildContext context) => TraducirDocumentosPage(),
-        'traducir-fotos' : (BuildContext context) => TraducirImagenesPage(),
+        'traducir-imagenes' : (BuildContext context) => TraducirImagenesPage(),
         //SECCION DE LA BARRA INFERIOR DE LA APLICACION
         'menu' : (BuildContext context) => MenuPage(),
         'traducciones-guardadas' : (BuildContext context) => TraduccionesGuardadasPage(),

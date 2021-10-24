@@ -1,8 +1,6 @@
-//import 'dart:js';
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
-import 'dart:math';
 
 
 class MenuPage extends StatefulWidget {
@@ -19,12 +17,11 @@ class _MenuPageState extends State<MenuPage> {
       body: Stack(
         children: [
           _fondoApp(),
-
           SingleChildScrollView( //SIMILAR A LISTVIEW, LA DIFERENCIA ES QUE ABARCA TODA LA PANTALLA
               child: Column(
                 children: [
                   _tituloDescripcion(),
-                  _botonesRedondeados(context)
+                  _botonesMenu(context)
                 ],
               ),
             )
@@ -37,46 +34,17 @@ class _MenuPageState extends State<MenuPage> {
 
   //ESTILO Y FORMA DEL FONDO DE LA PANTALLA
   Widget _fondoApp(){
-    final gradiente = Container(
+    final fondo = Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset(0.0, 0.6), //Se define en que punto inicia el gradiente en la coordenada X y Y  
-          end: FractionalOffset(0.0, 1.0),
-          colors: [
-            Color.fromRGBO(52, 54, 101, 1.0),
-            Color.fromRGBO(35, 37, 57, 1.0)
-          ]
-        )
+        color: Colors.white
       ),
-    );
-
-    //PARTE DEL ESTILO DE LA CAJA ROSA
-    final cajaRosa = Transform.rotate(
-      angle: -pi / 5.0, //Para que el angulo del cuadrado se gire 
-      child: Container(
-        height: 360.0,
-        width: 360.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(80.0),
-          gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(236, 98, 188, 1.0),
-              Color.fromRGBO(241, 147, 172, 1.0)
-            ] 
-          ),
-        ),
-      )
     );
     
     return Stack(
       children: [
-        gradiente,
-        Positioned( //Sirve para ubicar un elemento con coordenadas especificas
-          top: -100.0,
-          child: cajaRosa,
-        )
+        fondo,
       ],
     );
   }
@@ -89,7 +57,7 @@ class _MenuPageState extends State<MenuPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Menu de opciones', style:TextStyle( color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+              Text('Menú de opciones', style:TextStyle( color: Colors.black87, fontSize: 40.0, fontWeight: FontWeight.bold),),
               SizedBox( height: 10.0),
               //Text('Classify this transaccion into a particular category', style:TextStyle( color: Colors.white, fontSize: 18.0, )),
             ],
@@ -99,22 +67,22 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   //SECCION DONDE SE LLAMARAN A LAS FUNCIONES DE LOS BOTONES
-  Widget _botonesRedondeados(BuildContext context){
+  Widget _botonesMenu(BuildContext context){
     return Table( 
       children: [
         TableRow( 
           children: [
-            _crearBotonRedondeado(context, Colors.blue, Icons.text_fields, 'Traducir texto plano', 'traducir-texto'),
+            _crearBotonMenu(context, Colors.white, Icons.text_fields, 'Traducir texto plano', 'traducir-texto'),
           ]
         ),
         TableRow(
           children: [
-            _crearBotonRedondeado(context, Colors.green, Icons.folder, 'Traducir documentos', 'traducir-documentos'),
+            _crearBotonMenu(context, Colors.white, Icons.folder, 'Traducir documentos', 'traducir-documentos'),
           ]
         ),
         TableRow(
           children: [
-            _crearBotonRedondeado(context, Colors.red, Icons.image, 'Traducir texto en imagenes', 'traducir-fotos'),
+            _crearBotonMenu(context, Colors.white, Icons.image, 'Traducir texto en imagenes', 'traducir-imagenes'),
           ]
         ),
       ],
@@ -122,7 +90,7 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   //CREACION DE CONTAINERS EN FORMA DE BOTONES EN LA SECCION DEL CUERPO DE LA APLICACION
-  Widget _crearBotonRedondeado(BuildContext context, Color color, IconData icono, String texto, String ruta){  
+  Widget _crearBotonMenu(BuildContext context, Color color, IconData icono, String texto, String ruta){  
     return //BackdropFilter( //TODO LO QUE QUEDE ATRAS QUEDE COMO BORROSO 
       //filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), //EL BLUR CONSUME RECURSOS, (POSIBLE ELIMINACION)
       //child: 
@@ -131,10 +99,10 @@ class _MenuPageState extends State<MenuPage> {
            Navigator.pushNamed(context, ruta);
           },
         child: Container(
-          height: 140.0,
+          height: 160.0,
           margin: EdgeInsets.all(15.0),
           decoration: BoxDecoration(
-            color: Color.fromRGBO(62, 66, 107, 0.7),
+            color: Colors.green[800],
             borderRadius: BorderRadius.circular(20.0)
           ),
           
@@ -144,10 +112,10 @@ class _MenuPageState extends State<MenuPage> {
               SizedBox(height: 5.0),
               CircleAvatar(
                 backgroundColor: color, //SE PONE EL COLOR QUE ESTAMOS RECIBIENDO EN EL PARAMETRO
-                radius: 35.0,
-                child: Icon(icono, color: Colors.white, size: 30.0,), //SE PONE EL ICONO QUE ESTAMOS RECIBIENDO EN EL PARAMETRO
+                radius: 40.0,
+                child: Icon(icono, color: Colors.black87, size: 40.0,), //SE PONE EL ICONO QUE ESTAMOS RECIBIENDO EN EL PARAMETRO
               ),
-              Text(texto, style: TextStyle(color: color),), //SE PONE EL TEXTO Y COLOR QUE ESTAMOS RECIBIENDO EN EL PARAMETRO
+              Text(texto, style: TextStyle(color: color, fontSize: 20),), //SE PONE EL TEXTO Y COLOR QUE ESTAMOS RECIBIENDO EN EL PARAMETRO
               SizedBox(height: 5.0)
             ],
           ),
@@ -169,29 +137,28 @@ class _MenuPageState extends State<MenuPage> {
 
     return Theme( //LA UNICA FORMA DE CAMBIAR LAS PROPIEDADES DEL BOTTOMNAVIGATIONBAR IMPLICA CAMBIAR EL THEME
       data: Theme.of(context).copyWith(
-        canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-        primaryColor: Colors.pinkAccent,
-        textTheme: Theme.of(context).textTheme.copyWith(caption: TextStyle ( color: Color.fromRGBO(116, 117, 152, 1.0)))
+        canvasColor: Colors.white,
+        unselectedWidgetColor: Colors.grey,
+        //splashColor: Colors.red //Efecto color del tap
       ),
       
       child: BottomNavigationBar(
-
+        //PONER COLOR EN EL ITEM SELECCIONADO
+        fixedColor: Colors.green[800],
         onTap: (index){ //Al hacer tap obtendra el index de la barra y se ira a la pagina requerida
           setState(() {
             _botonBarraActual = index;
             Navigator.pushNamed(context, _listaPaginas[_botonBarraActual]);
           });
         },
-
         currentIndex: _botonBarraActual, //se toma el indice actual  
-
         items: [ //Todos los items de la barra de navegacion
           BottomNavigationBarItem(
-            icon: Icon( Icons.calendar_today, size: 30.0,),
+            icon: Icon( Icons.home, size: 30.0,),
             title: Text('Inicio'),
           ),
           BottomNavigationBarItem(
-            icon: Icon( Icons.bubble_chart, size: 30.0,),
+            icon: Icon( Icons.list_alt, size: 30.0,),
             title: Text('Trad. Guardadas'),
           ),
           BottomNavigationBarItem(

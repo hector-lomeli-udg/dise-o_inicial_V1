@@ -1,7 +1,4 @@
-//import 'package:diseno_inicial/src/pages/home/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:math';
 
 import 'package:diseno_inicial/src/pages/scroll/scroll_page.dart';
 import 'package:diseno_inicial/src/pages/home/settings/politicas_uso_page.dart';
@@ -20,7 +17,8 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CONFIGURACION'),
+        title: Text('CONFIGURACIÓN'),
+        backgroundColor: Colors.green[800],
       ),
 
       
@@ -32,7 +30,8 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
               child: Column(
                 children: [
                   _tituloDescripcion(),
-                  Text('pepe_el_toro_es_inocente@gmail.com'),
+                  Text('pepe_el_toro_es_inocente@gmail.com', style: TextStyle(fontSize: 20.0),),
+                  SizedBox(height: 30.0,),
                   _botonPoliticasDePrivacidad(),
                   SizedBox(height: 30.0,),
                   _botonPoliticasDeUso(),
@@ -50,46 +49,17 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
 
 
   Widget _fondoApp(){
-    final gradiente = Container(
+    final fondo = Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset(0.0, 0.6), //Se define en que punto inicia el gradiente en la coordenada X y Y  
-          end: FractionalOffset(0.0, 1.0),
-          colors: [
-            Color.fromRGBO(52, 54, 101, 1.0),
-            Color.fromRGBO(35, 37, 57, 1.0)
-          ]
-        )
+        color: Colors.white,
       ),
-    );
-
-    //PARTE DEL ESTILO DE LA CAJA ROSA
-    final cajaRosa = Transform.rotate(
-      angle: -pi / 5.0, //Para que el angulo del cuadrado se gire 
-      child: Container(
-        height: 360.0,
-        width: 360.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(80.0),
-          gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(236, 98, 188, 1.0),
-              Color.fromRGBO(241, 147, 172, 1.0)
-            ] 
-          ),
-        ),
-      )
     );
     
     return Stack(
       children: [
-        gradiente,
-        Positioned( //Sirve para ubicar un elemento con coordenadas especificas
-          top: -100.0,
-          child: cajaRosa,
-        )
+        fondo,
       ],
     );
   }
@@ -102,9 +72,8 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Configuracion e información de usuario', style:TextStyle( color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+              Text('Configuración e información de usuario', style:TextStyle( color: Colors.black87, fontSize: 30.0, fontWeight: FontWeight.bold),),
               SizedBox( height: 10.0),
-              //Text('Classify this transaccion into a particular category', style:TextStyle( color: Colors.white, fontSize: 18.0, )),
             ],
           )
       ),
@@ -114,7 +83,7 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
 
 
   Widget _botonPoliticasDePrivacidad(){
-    return FlatButton(
+    return OutlinedButton(
       onPressed: (){
         final rutaPoliticasDePrivacidad = MaterialPageRoute(
                 builder: (context){
@@ -125,7 +94,12 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
       },
       child: Container(
         //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-        child: Text('Politicas de privacidad'),
+        child: Text('Politicas de privacidad', style: TextStyle(fontSize: 20.0),),
+      ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.black87,
+        side: BorderSide(color: Colors.black87, width: 3.0),
+        shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(5.0) ),
       ),
     );
   }
@@ -133,7 +107,7 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
 
 
   Widget _botonPoliticasDeUso(){
-    return FlatButton(
+    return OutlinedButton(
       onPressed: (){
         final rutaPoliticasDeUso = MaterialPageRoute(
                 builder: (context){
@@ -144,16 +118,21 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
       },
       child: Container(
         //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-        child: Text('Politicas de uso'),
+        child: Text('Politicas de uso', style: TextStyle(fontSize: 20.0),),
+      ),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.black87,
+        side: BorderSide(color: Colors.black87, width: 3.0),
+        shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(5.0) ),
       ),
     );
   }
 
 
   Widget _botonSalir(BuildContext context){
-    return RaisedButton(
-          shape: StadiumBorder(),
-          color: Colors.blue,
+    return MaterialButton(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30.0) ),
+          color: Colors.redAccent[700],
           textColor: Colors.white,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
@@ -182,12 +161,12 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
 
     return Theme( //LA UNICA FORMA DE CAMBIAR LAS PROPIEDADES DEL BOTTOMNAVIGATIONBAR IMPLICA CAMBIAR EL THEME
       data: Theme.of(context).copyWith(
-        canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-        primaryColor: Colors.pinkAccent,
-        textTheme: Theme.of(context).textTheme.copyWith(caption: TextStyle ( color: Color.fromRGBO(116, 117, 152, 1.0)))
+        canvasColor: Colors.white,
+        unselectedWidgetColor: Colors.grey,
       ),
       
       child: BottomNavigationBar(
+        fixedColor: Colors.green[800],
         onTap: (index){ //Al hacer tap obtendra el index de la barra y se ira a la pagina requerida
           setState(() {
             _botonBarraActual = index;
@@ -199,11 +178,11 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
 
         items: [ //Todos los items de la barra de navegacion
           BottomNavigationBarItem(
-            icon: Icon( Icons.calendar_today, size: 30.0,),
+            icon: Icon( Icons.home, size: 30.0,),
             title: Text('Inicio'),
           ),
           BottomNavigationBarItem(
-            icon: Icon( Icons.bubble_chart, size: 30.0,),
+            icon: Icon( Icons.list_alt, size: 30.0,),
             title: Text('Trad. Guardadas'),
           ),
           BottomNavigationBarItem(

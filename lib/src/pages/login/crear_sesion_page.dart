@@ -1,4 +1,4 @@
-import 'package:diseno_inicial/src/pages/login/crear_sesion_password_page.dart';
+import 'package:diseno_inicial/src/pages/login/crear_sesion_verificacion.dart';
 import 'package:flutter/material.dart';
 
 class CrearSesionPage extends StatelessWidget {
@@ -26,8 +26,8 @@ class CrearSesionPage extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromRGBO(63, 63, 156, 1.0),
-            Color.fromRGBO(90, 60, 178, 1.0),
+            Colors.lightGreen,
+            Color.fromRGBO(0, 150, 28, 1.0),
           ]
         )
       ),
@@ -101,8 +101,6 @@ class CrearSesionPage extends StatelessWidget {
                 SizedBox(height: 60.0,),
                 _crearEmail(),
                 SizedBox(height: 30.0,),
-                _crearClave(),
-                SizedBox(height: 30.0,),
                 _botonConfirmar(context)
               ],
             ),
@@ -118,7 +116,7 @@ class CrearSesionPage extends StatelessWidget {
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email, color: Colors.deepPurple, ),
+          icon: Icon(Icons.alternate_email, color: Colors.green[800], ),
           hintText: 'nombre@correo.com',
           labelText: 'Correo electronico',
 
@@ -128,40 +126,27 @@ class CrearSesionPage extends StatelessWidget {
   }
 
 
-  Widget _crearClave() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          icon: Icon(Icons.vpn_key, color: Colors.deepPurple, ),
-          labelText: 'Clave de confirmación',
-        ),
-      ),
-    );
-  }
+  
 
 
   Widget _botonConfirmar(BuildContext context){
 
-    return RaisedButton(
+    return MaterialButton(
       onPressed: (){
-        final rutaCrearPassword = MaterialPageRoute(
+        final rutaVerificacion = MaterialPageRoute(
                 builder: (context){
-                  return CrearSesionPasswordPage();
+                  return CrearSesionVerificacionPage();
                 }
               );
-            Navigator.push( context, rutaCrearPassword);
+            Navigator.push( context, rutaVerificacion);
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
         child: Text('Confirmar'),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0), 
-      ),
+      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30.0), ),
       elevation: 0.0,
-      color: Colors.deepPurple,
+      color: Colors.green[800],
       textColor: Colors.white,
     );
   }

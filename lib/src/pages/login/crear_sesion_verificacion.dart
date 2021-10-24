@@ -1,10 +1,8 @@
+import 'package:diseno_inicial/src/pages/login/crear_sesion_password_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:diseno_inicial/src/pages/login/inicio_sesion_page.dart';
-//import 'package:diseno_inicial/src/pages/home/menu/menu_page.dart';
-
-class InicioSesionRecuperarPage extends StatelessWidget {
-  const InicioSesionRecuperarPage({Key? key}) : super(key: key);
+class CrearSesionVerificacionPage extends StatelessWidget {
+  const CrearSesionVerificacionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +57,7 @@ class InicioSesionRecuperarPage extends StatelessWidget {
             children: [
               Icon(Icons.person_pin_circle, color: Colors.white, size: 100.0,),
               SizedBox(height: 10.0, width: double.infinity),
-              Text('Recupere su sesión por correo', style: TextStyle(color: Colors.white, fontSize: 25.0),)
+              Text('Revise notificación a su correo', style: TextStyle(color: Colors.white, fontSize: 25.0),)
             ],
           ),
         )
@@ -99,11 +97,11 @@ class InicioSesionRecuperarPage extends StatelessWidget {
             ),
             child: Column
             (children: [
-                Text('Ingrese su correo electronico', style: TextStyle(fontSize: 20.0),),
+                Text('Ingrese la clave de verificación', style: TextStyle(fontSize: 20.0),),
                 SizedBox(height: 30.0,),
-                _crearEmail(),
+                _crearClave(),
                 SizedBox(height: 30.0,),
-                _botonRecuperarCredenciales(context)
+                _botonIngresar(context)
               ],
             ),
           ),
@@ -113,67 +111,39 @@ class InicioSesionRecuperarPage extends StatelessWidget {
   }
 
 
-  Widget _crearEmail() {
+  Widget _crearClave() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email, color: Colors.green[800], ),
-          hintText: 'nombre@correo.com',
-          labelText: 'Correo electronico',
-
+          icon: Icon(Icons.vpn_key, color: Colors.green[800], ),
+          labelText: 'Clave de verificación',
         ),
       ),
     );
   }
 
 
-  Widget _botonRecuperarCredenciales(BuildContext context){
+  Widget _botonIngresar(BuildContext context){
+
     return MaterialButton(
       onPressed: (){
-        showDialog(
-          context: context, 
-          builder: (BuildContext context) => _popUpRecuperarCredenciales(context));
+        final rutaCrearPassword = MaterialPageRoute(
+                builder: (context){
+                  return CrearSesionPasswordPage();
+                }
+              );
+            Navigator.push( context, rutaCrearPassword);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
-        child: Text('Recuperar credenciales'),
+        padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+        child: Text('Confirmar'),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0), 
-      ),
+      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30.0), ),
       elevation: 0.0,
       color: Colors.green[800],
       textColor: Colors.white,
     );
   }
-
-
-  Widget _popUpRecuperarCredenciales(BuildContext context) {
-  return new AlertDialog(
-    title: const Text('Se envio la contraseña a su correo'),
-    content: new Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text("Una vez consultada su contraseña por favor ingresela en el inicio de sesión"),
-      ],
-    ),
-    actions: <Widget>[
-      new FlatButton(
-        onPressed: () {
-          final rutaInicioSesion = MaterialPageRoute(
-                builder: (context){
-                  return InicioSesionPage();
-                }
-              );
-            Navigator.push( context, rutaInicioSesion);
-        },
-        textColor: Theme.of(context).primaryColor,
-        child: const Text('Continuar'),
-      ),
-    ],
-  );
-}
 }
